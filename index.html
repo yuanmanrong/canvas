@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小球碰撞</title>
+    <style>
+      .btn {
+        width: 100px;
+        height: 50px;
+        margin-left: 50px;
+        border: none;
+        border-radius: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <canvas
+        id="canvas"
+        width="400px"
+        height="400px"
+        style="background-color: azure"
+      ></canvas>
+
+      <div>
+        <button class="btn start">开始</button>
+        <button class="btn end">停止</button>
+      </div>
+    </div>
+  </body>
+  <script src="./src/index.js"></script>
+  <script>
+    //按钮
+    let start = document.querySelector(".start");
+    let end = document.querySelector(".end");
+
+    //获取画布
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+
+    //实例化两个球
+    let b1 = initCanvas(ctx, {
+      startX: 100,
+      speed: 2,
+      direction: true,
+      color: "blue",
+      radius: 20,
+    });
+    let b2 = initCanvas(ctx, {
+      startX: 300,
+      color: "red",
+    });
+
+    //使用requestAnimationFrame进行渲染
+    function animate() {
+      let b1Position = b1.startX;
+      let b2Position = b2.startX;
+      if (
+        b2Position > b1Position - b1.radius &&
+        b2Position < b1Position + b1.radius
+      ) {
+        b1.direction = !b1.direction;
+        b2.direction = !b2.direction;
+      }
+      b2.run();
+      b1.run();
+      stop = requestAnimationFrame(animate);
+    }
+
+    //按钮的点击事件
+    start.addEventListener("click", function (e) {
+      console.log("kaihsi");
+      cancelAnimationFrame(stop);
+      animate();
+    });
+    end.addEventListener("click", function () {
+      console.log("jieshu");
+      cancelAnimationFrame(stop);
+    });
+  </script>
+
+  <!-- <script>
+    //canvas实现手写笔功能
+    let canvas = document.getElementById("canvas");
+    let context = canvas.getContext("2d");
+
+    context.linewidth = 10; // 画笔宽度
+    context.strokeStyle = "blue"; // 画笔颜色
+
+    canvas.onmousedown = function (e) {
+      context.beginPath(); // 开始路径
+      context.moveTo(e.pageX, e.pageY);
+      canvas.onmousemove = function (e) {
+        context.lineTo(e.pageX, e.pageY);
+        context.stroke(); // 绘制已经定义的路径
+      };
+      canvas.onmouseup = function (e) {
+        context.closePath();
+        canvas.onmousemove = function () {
+          return;
+        };
+      };
+    };
+  </script> -->
+</html>
