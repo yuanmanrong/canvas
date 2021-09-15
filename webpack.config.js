@@ -7,6 +7,9 @@ module.exports = {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, "dist"),
     },
+    // devServer: {
+    //   hot: true
+    // },
     plugins:[
       new HtmlWebpackPlugin({
       title: "小球碰撞"
