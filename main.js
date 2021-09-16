@@ -1,7 +1,8 @@
 import './style.css'
 import {Ball, initCanvas} from "./ball.js"
 
-document.querySelector("#app").innerHTML= `<div>
+console.log(111111,document.body)
+document.body.innerHTML= `<div>
 <canvas
   id="canvas"
   width="400px"
@@ -14,7 +15,7 @@ document.querySelector("#app").innerHTML= `<div>
   <button class="btn end">停止</button>
 </div>
 </div>`
-
+console.log(22222)
  //获取开始结束按钮
  let start = document.querySelector(".start");
  let end = document.querySelector(".end");
@@ -26,7 +27,7 @@ document.querySelector("#app").innerHTML= `<div>
  //实例化两个球
  let b1 = initCanvas(ctx, {
    startX: 100,
-   speed: 1,
+   speed: 2,
    //direction: true,
    color: "blue",
    radius: 20,
@@ -34,7 +35,7 @@ document.querySelector("#app").innerHTML= `<div>
  let b2 = initCanvas(ctx, {
    startX: 300,
    color: "red",
-   speed: 6,
+   speed: 3,
  });
 
  //使用requestAnimationFrame进行渲染
